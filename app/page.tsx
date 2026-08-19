@@ -37,6 +37,7 @@ export default function Home() {
             </a>{" "}
             center.
           </p>
+          <p>IronBoy Foundation</p>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
@@ -65,5 +66,6 @@ export default function Home() {
         </div>
       </main>
     </div>
+    
   );
 }
