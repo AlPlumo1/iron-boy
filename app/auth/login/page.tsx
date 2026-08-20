@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import Link from "next/link";
 
 import { signIn, type SignInState } from "@/app/auth/actions";
 
@@ -45,6 +46,16 @@ export default function LoginPage() {
         >
           {isPending ? "Logging in..." : "Log in"}
         </button>
+
+        <p className="text-center text-sm">
+          No account ?{" "}
+          <Link
+            href="/auth/signup"
+            className="font-medium underline underline-offset-4"
+          >
+            Signup now !
+          </Link>
+        </p>
       </form>
     </main>
   );
