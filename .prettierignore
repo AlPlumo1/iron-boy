@@ -2,3 +2,5 @@ node_modules
 .next
 coverage
 public
+
+supabase/.temp
