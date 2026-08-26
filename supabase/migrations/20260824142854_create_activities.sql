@@ -54,6 +54,8 @@ create table public.activities (
 
   comment text,
 
+  calories numeric(4,0),
+
   source public.activity_source not null default 'manual',
 
   external_id text,
