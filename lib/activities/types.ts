@@ -5,6 +5,9 @@ type Tables = Database["public"]["Tables"];
 export type Activity = Tables["activities"]["Row"];
 export type ActivityInsert = Tables["activities"]["Insert"];
 export type ActivityUpdate = Tables["activities"]["Update"];
+export type ActivitySport = Database["public"]["Enums"]["activity_sport"];
+export type ActivityFeeling = Database["public"]["Enums"]["activity_feeling"];
+export type ActivityWeather = Database["public"]["Enums"]["weather"];
 
 export type ActivityEnvironment = Tables["activity_environment"]["Row"];
 export type ActivityEnvironmentInsert =
