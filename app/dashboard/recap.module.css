@@ -1,0 +1,154 @@
+.cards {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(2rem, 8vw, 9rem);
+  padding: 2rem clamp(2.5rem, 5.6vw, 5rem) 5.75rem;
+}
+
+.card {
+  position: relative;
+  flex: 0 1 clamp(16.5rem, 20.75vw, 18rem);
+  height: 22rem;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 1.65rem;
+  background:
+    linear-gradient(#000, #000) padding-box,
+    linear-gradient(to bottom, #b979ff 0%, #4f1d8f 58%, transparent 100%)
+      border-box;
+  outline: none;
+  transition:
+    flex-basis 320ms ease,
+    height 320ms ease,
+    transform 320ms ease,
+    filter 320ms ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  flex-basis: clamp(26rem, 32vw, 28rem);
+  height: 32.75rem;
+  transform: translateY(-1.25rem);
+  background:
+    radial-gradient(
+        circle at 0 0,
+        rgba(173, 117, 255, 0.96) 0%,
+        rgba(98, 35, 196, 0.82) 19%,
+        rgba(20, 6, 45, 0.72) 40%,
+        #000 61%
+      )
+      padding-box,
+    linear-gradient(to bottom, #c48cff 0%, #5a249b 60%, transparent 100%)
+      border-box;
+  filter: drop-shadow(0 20px 38px rgba(92, 39, 171, 0.16));
+}
+
+.cardHeader {
+  position: relative;
+  display: flex;
+  height: 4.25rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2.55rem;
+  border-bottom: 4px solid #fff;
+}
+
+.cardHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.addIcon {
+  position: absolute;
+  top: 0.45rem;
+  right: -1.7rem;
+  display: grid;
+  width: 2.15rem;
+  height: 2.15rem;
+  place-items: center;
+  border: 1px solid #6128b5;
+  border-radius: 50%;
+  background: radial-gradient(circle at 25% 20%, #5422a4, #050505 62%);
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 2.55rem;
+  padding: 2.65rem 3rem 3rem;
+  font-size: 1.25rem;
+}
+
+.activity {
+  white-space: nowrap;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.activity:nth-child(n + 4) {
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+.card:hover .activity:nth-child(n + 4),
+.card:focus-visible .activity:nth-child(n + 4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 130ms;
+}
+
+.emptyState {
+  color: rgb(255 255 255 / 62%);
+  line-height: 1.5;
+}
+
+@media (max-width: 1023px) {
+  .cards {
+    align-items: stretch;
+    gap: 2rem;
+    padding-top: 4rem;
+  }
+
+  .card {
+    flex-basis: calc((100% - 4rem) / 3);
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    flex-basis: calc((100% - 4rem) / 3);
+  }
+
+  .activityList {
+    padding-inline: 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .cards {
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow: visible;
+    padding: 3rem 1.5rem;
+  }
+
+  .card,
+  .card:hover,
+  .card:focus-visible {
+    width: 100%;
+    height: 21rem;
+    min-height: 21rem;
+    flex-basis: auto;
+    transform: none;
+  }
+}
