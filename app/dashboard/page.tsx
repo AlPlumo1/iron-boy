@@ -1,7 +1,5 @@
 import { getActivities } from "@/lib/activities/queries";
-import type { Activity } from "@/lib/activities/types";
-
-import styles from "./recap.module.css";
+import { ActivityCards } from "./activity-cards";
 
 const activitySections = [
   { sport: "running", label: "Course" },
@@ -60,57 +58,6 @@ function SunIcon() {
   );
 }
 
-function formatActivity(activity: Activity) {
-  const date = new Intl.DateTimeFormat("fr-FR", {
-    day: "numeric",
-    month: "short",
-    timeZone: "Europe/Paris",
-  }).format(new Date(activity.started_at));
-  const minutes = Math.max(1, Math.round(activity.duration_seconds / 60));
-  const duration =
-    minutes >= 60
-      ? `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, "0")}`
-      : `${minutes} min`;
-  const distance = activity.distance_meters
-    ? `${(activity.distance_meters / 1000).toLocaleString("fr-FR", {
-        maximumFractionDigits: 1,
-      })} km`
-    : null;
-
-  return [date, distance, duration].filter(Boolean).join(" · ");
-}
-
-function ActivityCard({
-  label,
-  activities,
-}: {
-  label: string;
-  activities: Activity[];
-}) {
-  return (
-    <article className={styles.card} tabIndex={0}>
-      <header className={styles.cardHeader}>
-        <h2>{label}</h2>
-        <span className={styles.addIcon} aria-hidden="true">
-          +
-        </span>
-      </header>
-
-      <ul className={styles.activityList}>
-        {activities.length > 0 ? (
-          activities.map((activity) => (
-            <li key={activity.id} className={styles.activity}>
-              {formatActivity(activity)}
-            </li>
-          ))
-        ) : (
-          <li className={styles.emptyState}>Aucune activité récente</li>
-        )}
-      </ul>
-    </article>
-  );
-}
-
 export default async function DashboardPage() {
   const activities = await getActivities();
 
@@ -142,20 +89,15 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <section
-        aria-label="Activités récentes par sport"
-        className={styles.cards}
-      >
-        {activitySections.map(({ sport, label }) => (
-          <ActivityCard
-            key={sport}
-            label={label}
-            activities={activities
-              .filter((activity) => activity.sport === sport)
-              .slice(0, 5)}
-          />
-        ))}
-      </section>
+      <ActivityCards
+        sections={activitySections.map(({ sport, label }) => ({
+          sport,
+          label,
+          activities: activities
+            .filter((activity) => activity.sport === sport)
+            .slice(0, 5),
+        }))}
+      />
     </main>
   );
 }

@@ -27,7 +27,8 @@
 }
 
 .card:hover,
-.card:focus-visible {
+.card:focus-visible,
+.card:focus-within {
   flex-basis: clamp(26rem, 32vw, 28rem);
   height: 32.75rem;
   transform: translateY(-1.25rem);
@@ -73,9 +74,23 @@
   border: 1px solid #6128b5;
   border-radius: 50%;
   background: radial-gradient(circle at 25% 20%, #5422a4, #050505 62%);
+  color: #fff;
+  cursor: pointer;
   font-size: 1.8rem;
   font-weight: 300;
   line-height: 1;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.addIcon:hover,
+.addIcon:focus-visible {
+  border-color: #c99cff;
+  box-shadow: 0 0 16px rgb(149 75 246 / 58%);
+  outline: none;
+  transform: scale(1.08);
 }
 
 .activityList {
@@ -101,7 +116,8 @@
 }
 
 .card:hover .activity:nth-child(n + 4),
-.card:focus-visible .activity:nth-child(n + 4) {
+.card:focus-visible .activity:nth-child(n + 4),
+.card:focus-within .activity:nth-child(n + 4) {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 130ms;
@@ -110,6 +126,28 @@
 .emptyState {
   color: rgb(255 255 255 / 62%);
   line-height: 1.5;
+}
+
+.toast {
+  position: fixed;
+  z-index: 60;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid #9eeae3;
+  border-radius: 999px;
+  background: #0a0710;
+  color: #c8fff9;
+  box-shadow: 0 0 24px rgb(102 219 209 / 20%);
+  font-size: 0.82rem;
+  animation: toast-in 180ms ease-out both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.98);
+  }
 }
 
 @media (max-width: 1023px) {
@@ -124,7 +162,8 @@
   }
 
   .card:hover,
-  .card:focus-visible {
+  .card:focus-visible,
+  .card:focus-within {
     flex-basis: calc((100% - 4rem) / 3);
   }
 
@@ -144,11 +183,22 @@
 
   .card,
   .card:hover,
-  .card:focus-visible {
+  .card:focus-visible,
+  .card:focus-within {
     width: 100%;
     height: 21rem;
     min-height: 21rem;
     flex-basis: auto;
     transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .activity,
+  .addIcon,
+  .toast {
+    animation: none;
+    transition-duration: 0.01ms;
   }
 }
